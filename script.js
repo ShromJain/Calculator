@@ -67,8 +67,9 @@ Buttons.forEach(button => {
             default:
                 break;
         } 
-        userInput.textContent = `${numA} ${opp} ${numB}`;
-        resultDisplay.textContent = result;
+
+        displayUpdate(numA, opp, numB, result);
+
     })
 })
 
@@ -103,12 +104,19 @@ function operate(a, opp, b) {
     return result.toString();
 }
 
-function assignNumber(a, opp, b, button) {
-    if(opp === ''){
-        a = a+button.textContent;
-        return a;
-    }else{
-        b = b+button.textContent
-        return b;
-    }
+function displayUpdate(a, opp, b, result){
+    userInput.textContent = `${a} ${opp} ${b}`
+    resultDisplay.textContent = `${result}`
+
 }
+
+addEventListener('keydown', (key) => {
+
+    const buttonIds = [ '+', '-', '/', '*', '%', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Backspace', '.'];
+
+    if(buttonIds.includes(key.key)){
+        document.getElementById(key.key).click();
+    }else if (key.key === '=' || key.key === 'Enter') {
+		document.getElementById('equals').click();	
+    }
+})
